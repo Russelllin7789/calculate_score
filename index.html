@@ -20,5 +20,55 @@
     />
     <link rel="stylesheet" href="./styles/style.css" />
   </head>
-  <body></body>
+  <body>
+    <!-- opening animation -->
+    <section class="animation-wrapper"></section>
+
+    <header>
+      <nav>
+        <ul>
+          <li><a href="#">Home</a></li>
+          <li><a href="#">Grade Analysis</a></li>
+          <li><a href="#">Terms of Service</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+      <section class="main-part">
+        <h1>Grade Input Form</h1>
+        <div class="button-area">
+          <button class="btn sort-descending">降序排列</button>
+          <button class="btn sort-ascending">升序排列</button>
+        </div>
+        <div class="all-inputs">
+          <form>
+            <div class="grader">
+              <input
+                type="text"
+                placeholder="class category"
+                class="class-type"
+                list="opt"
+              />
+              <input
+                type="text"
+                placeholder="class number"
+                class="class-number"
+              />
+              <input
+                type="number"
+                placeholder="credits"
+                min="0"
+                max="6"
+                class="class-credit"
+              />
+            </div>
+          </form>
+        </div>
+      </section>
+    </main>
+
+    <!-- the autocomplete contents of class type -->
+    <datalist id="opt"> </datalist>
+  </body>
 </html>
