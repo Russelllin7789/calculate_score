@@ -20,4 +20,26 @@ a {
 }
 .btn:hover {
   cursor: pointer;
+}
+
+body {
+  background-color: #272727;
+  color: white;
+  font-family: "Baloo 2", cursive;
+}
+body header nav {
+  box-shadow: 0 8px 6px -6px black;
+}
+body header nav ul {
+  display: flex;
+}
+body header nav ul li {
+  padding: 1rem;
+}
+body header nav ul li a {
+  font-size: 1.15rem;
+  transition: all 0.3s ease;
+}
+body header nav ul li a:hover {
+  color: yellow;
 }/*# sourceMappingURL=style.css.map */

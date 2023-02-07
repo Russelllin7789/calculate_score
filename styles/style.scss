@@ -21,3 +21,31 @@ a {
     cursor: pointer;
   }
 }
+
+body {
+  background-color: #272727;
+  color: white;
+  font-family: "Baloo 2", cursive;
+
+  section.animation-wrapper {
+  }
+
+  header {
+    nav {
+      box-shadow: 0 8px 6px -6px black;
+      ul {
+        display: flex;
+        li {
+          padding: 1rem;
+          a {
+            font-size: 1.15rem;
+            transition: all 0.3s ease;
+            &:hover {
+              color: yellow;
+            }
+          }
+        }
+      }
+    }
+  }
+}
