@@ -20,3 +20,17 @@ timeLine
 window.setTimeout(() => {
   animation.style.pointerEvents = "none";
 }, 2500);
+
+// disable enter key for whole project
+window.addEventListener("keypress", (event) => {
+  if (event.key === "Enter") {
+    event.preventDefault();
+  }
+});
+// disable the submit form behavior for all buttons
+let allButtons = document.querySelectorAll("button");
+allButtons.forEach((button) =>
+  button.addEventListener("click", (event) => {
+    event.preventDefault();
+  })
+);
