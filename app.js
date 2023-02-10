@@ -3,7 +3,6 @@ let slider = document.querySelector(".slider");
 let animation = document.querySelector("section.animation-wrapper");
 
 const timeLine = new TimelineMax();
-
 // params: target, duration, original state, end state, seconds ahead
 timeLine
   .fromTo(hero, 1, { height: "0%" }, { height: "100%", ease: Power2.easeInOut })
@@ -34,3 +33,39 @@ allButtons.forEach((button) =>
     event.preventDefault();
   })
 );
+
+let allSelects = document.querySelectorAll("select");
+allSelects.forEach((select) => {
+  select.addEventListener("change", (event) => {
+    changeColor(event.target); // event.target => <select> tag itself
+  });
+});
+
+const changeColor = (target) => {
+  if (target.value === "A" || target.value === "A-") {
+    target.style.backgroundColor = "lightgreen";
+  } else if (
+    target.value === "B" ||
+    target.value === "B+" ||
+    target.value === "B-"
+  ) {
+    target.style.backgroundColor = "yellow";
+  } else if (
+    target.value === "C" ||
+    target.value === "C+" ||
+    target.value === "C-"
+  ) {
+    target.style.backgroundColor = "orange";
+  } else if (
+    target.value === "D" ||
+    target.value === "D+" ||
+    target.value === "D-"
+  ) {
+    target.style.backgroundColor = "red";
+  } else if (target.value === "F") {
+    target.style.backgroundColor = "grey";
+    target.style.color = "white";
+  } else {
+    target.style.backgroundColor = "white";
+  }
+};
