@@ -34,9 +34,17 @@ allButtons.forEach((button) =>
   })
 );
 
+let allCredits = document.querySelectorAll(".class-credit");
+allCredits.forEach((credit) => {
+  credit.addEventListener("change", () => {
+    setGPA();
+  });
+});
+
 let allSelects = document.querySelectorAll("select");
 allSelects.forEach((select) => {
   select.addEventListener("change", (event) => {
+    setGPA();
     changeColor(event.target); // event.target => <select> tag itself
   });
 });
@@ -67,5 +75,65 @@ const changeColor = (target) => {
     target.style.color = "white";
   } else {
     target.style.backgroundColor = "white";
+  }
+};
+
+const creditConverter = (creditStr) => {
+  switch (creditStr) {
+    case "A":
+      return 4.0;
+    case "A-":
+      return 3.7;
+    case "B+":
+      return 3.4;
+    case "B":
+      return 3.0;
+    case "B-":
+      return 2.7;
+    case "C+":
+      return 2.4;
+    case "C":
+      return 2.0;
+    case "C-":
+      return 1.7;
+    case "D+":
+      return 1.4;
+    case "D":
+      return 1.0;
+    case "D-":
+      return 0.7;
+    case "F":
+      return 0.0;
+    default:
+      return 0;
+  }
+};
+
+const setGPA = () => {
+  console.log("here!");
+  let formLength = document.querySelectorAll("form").length;
+
+  let sum = 0;
+  let creditSum = 0;
+  let result = 0.0;
+
+  for (let i = 0; i < allCredits.length; i++) {
+    if (!isNaN(allCredits[i].valueAsNumber)) {
+      creditSum += allCredits[i].valueAsNumber;
+    }
+  }
+
+  for (let i = 0; i < allSelects.length; i++) {
+    if (!isNaN(allCredits[i].valueAsNumber)) {
+      sum += allCredits[i].valueAsNumber * creditConverter(allSelects[i].value);
+    }
+  }
+
+  if (creditSum !== 0) {
+    document.getElementById("result-gpa").innerText = (sum / creditSum).toFixed(
+      2
+    );
+  } else {
+    document.getElementById("result-gpa").innerText = result;
   }
 };
