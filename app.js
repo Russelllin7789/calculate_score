@@ -258,4 +258,7 @@ const addNewForm = () => {
   newDiv.appendChild(newButton);
   newForm.appendChild(newDiv);
   document.querySelector(".all-inputs").appendChild(newForm);
+
+  // add animation while new form added
+  newForm.style.animation = "scaleUp 0.5s ease forwards";
 };

@@ -141,6 +141,23 @@ body main section.main-part div.result h2#result-gpa {
   font-weight: bold;
 }
 
+@-webkit-keyframes scaleUp {
+  from {
+    transform: scale(0);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+@keyframes scaleUp {
+  from {
+    transform: scale(0);
+  }
+  to {
+    transform: scale(1);
+  }
+}
 @-webkit-keyframes border_color {
   0% {
     border-color: red;
@@ -152,7 +169,6 @@ body main section.main-part div.result h2#result-gpa {
     border-color: yellow;
   }
 }
-
 @keyframes border_color {
   0% {
     border-color: red;
