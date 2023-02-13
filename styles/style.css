@@ -126,12 +126,9 @@ body main section.main-part div.result {
   border: 3px solid red;
   border-radius: 50%;
   text-align: center;
-  -webkit-animation-name: border_color;
-          animation-name: border_color;
-  -webkit-animation-duration: 8s;
-          animation-duration: 8s;
-  -webkit-animation-iteration-count: infinite;
-          animation-iteration-count: infinite;
+  animation-name: border_color;
+  animation-duration: 8s;
+  animation-iteration-count: infinite;
 }
 body main section.main-part div.result p {
   margin-top: 15px;
@@ -141,13 +138,9 @@ body main section.main-part div.result h2#result-gpa {
   font-weight: bold;
 }
 
-@-webkit-keyframes scaleUp {
-  from {
-    transform: scale(0);
-  }
-  to {
-    transform: scale(1);
-  }
+.remove {
+  transform: scale(0);
+  transition: all 0.5s;
 }
 
 @keyframes scaleUp {
@@ -156,17 +149,6 @@ body main section.main-part div.result h2#result-gpa {
   }
   to {
     transform: scale(1);
-  }
-}
-@-webkit-keyframes border_color {
-  0% {
-    border-color: red;
-  }
-  33% {
-    border-color: limegreen;
-  }
-  66% {
-    border-color: yellow;
   }
 }
 @keyframes border_color {

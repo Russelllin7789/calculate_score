@@ -2,6 +2,10 @@ let hero = document.querySelector(".hero");
 let slider = document.querySelector(".slider");
 let animation = document.querySelector("section.animation-wrapper");
 let addButton = document.querySelector(".plus-btn");
+let allButtons = document.querySelectorAll("button");
+let allCredits = document.querySelectorAll(".class-credit");
+let allSelects = document.querySelectorAll("select");
+let allTrash = document.querySelectorAll(".trash-button");
 
 const timeLine = new TimelineMax();
 // params: target, duration, original state, end state, seconds ahead
@@ -28,25 +32,36 @@ window.addEventListener("keypress", (event) => {
   }
 });
 // disable the submit form behavior for all buttons
-let allButtons = document.querySelectorAll("button");
+
 allButtons.forEach((button) =>
   button.addEventListener("click", (event) => {
     event.preventDefault();
   })
 );
 
-let allCredits = document.querySelectorAll(".class-credit");
 allCredits.forEach((credit) => {
   credit.addEventListener("change", () => {
     setGPA();
   });
 });
 
-let allSelects = document.querySelectorAll("select");
 allSelects.forEach((select) => {
   select.addEventListener("change", (event) => {
     setGPA();
     changeColor(event.target); // event.target => <select> tag itself
+  });
+});
+
+allTrash.forEach((trash) => {
+  trash.addEventListener("click", (e) => {
+    e.target.parentElement.parentElement.classList.add("remove");
+  });
+});
+allTrash.forEach((trash) => {
+  let form = trash.parentElement.parentElement;
+  form.addEventListener("transitionend", (e) => {
+    e.target.remove();
+    setGPA();
   });
 });
 
