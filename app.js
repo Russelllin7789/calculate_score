@@ -31,8 +31,8 @@ window.addEventListener("keypress", (event) => {
     event.preventDefault();
   }
 });
-// disable the submit form behavior for all buttons
 
+// disable the submit form behavior for all buttons
 allButtons.forEach((button) =>
   button.addEventListener("click", (event) => {
     event.preventDefault();
@@ -130,7 +130,6 @@ const creditConverter = (creditStr) => {
 };
 
 const setGPA = () => {
-  console.log("here!");
   let formLength = document.querySelectorAll("form").length;
 
   let sum = 0;
@@ -265,6 +264,19 @@ const addNewForm = () => {
   newItag.classList.add("fas");
   newItag.classList.add("fa-trash");
   newButton.appendChild(newItag);
+
+  newButton.addEventListener("click", (e) => {
+    e.preventDefault();
+    e.target.parentElement.parentElement.style.animation =
+      "scaleDown 0.5s ease forwards";
+    e.target.parentElement.parentElement.addEventListener(
+      "animationend",
+      (e) => {
+        e.target.remove();
+        setGPA();
+      }
+    );
+  });
 
   newDiv.appendChild(newInput1);
   newDiv.appendChild(newInput2);
