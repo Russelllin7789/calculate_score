@@ -6,6 +6,12 @@ let allButtons = document.querySelectorAll("button");
 let allCredits = document.querySelectorAll(".class-credit");
 let allSelects = document.querySelectorAll("select");
 let allTrash = document.querySelectorAll(".trash-button");
+let graders = document.querySelectorAll(".grader");
+let btn1 = document.querySelector(".sort-descending");
+let btn2 = document.querySelector(".sort-ascending");
+
+btn1.addEventListener("click", () => handleSorting("descending"));
+btn2.addEventListener("click", () => handleSorting("ascending"));
 
 const timeLine = new TimelineMax();
 // params: target, duration, original state, end state, seconds ahead
@@ -288,4 +294,87 @@ const addNewForm = () => {
 
   // add animation while new form added
   newForm.style.animation = "scaleUp 0.5s ease forwards";
+};
+
+const handleSorting = (direction) => {
+  let objectArray = [];
+
+  for (let i = 0; i < graders.length; i++) {
+    let className = graders[i].children[0].value;
+    let classNumber = graders[i].children[1].value;
+    let classCredit = graders[i].children[2].value;
+    let classGrade = graders[i].children[3].value;
+
+    if (
+      !(
+        className === "" &&
+        classNumber === "" &&
+        classCredit === "" &&
+        classGrade === ""
+      )
+    ) {
+      let classObject = {
+        className,
+        classNumber,
+        classCredit,
+        classGrade,
+      };
+      objectArray.push(classObject);
+    }
+  }
+
+  for (let i = 0; i < objectArray.length; i++) {
+    objectArray[i].classGradeNumber = creditConverter(
+      objectArray[i].classGrade
+    );
+  }
+
+  object = mergeSort(objectArray);
+  if (direction === "descending") {
+    objectArray = objectArray.reverse();
+  }
+
+  console.log(objectArray);
+};
+
+const merge = (a1, a2) => {
+  let result = [];
+  let i = 0;
+  let j = 0;
+
+  while (i < a1.length && j < a2.length) {
+    if (a1[i].classGradeNumber > a2[j].classGradeNumber) {
+      result.push(a2[j]);
+      j++;
+    } else {
+      result.push(a1[i]);
+      i++;
+    }
+  }
+
+  while (i < a1.length) {
+    result.push(a1[i]);
+    i++;
+  }
+  while (j < a2.length) {
+    result.push(a2[j]);
+    j++;
+  }
+
+  return result;
+};
+
+const mergeSort = (arr) => {
+  if (arr.length === 0) {
+    return;
+  }
+
+  if (arr.length === 1) {
+    return arr;
+  } else {
+    const middle = Math.floor(arr.length / 2);
+    const left = arr.slice(0, middle);
+    const right = arr.slice(middle, arr.length);
+    return merge(mergeSort(left), mergeSort(right));
+  }
 };
