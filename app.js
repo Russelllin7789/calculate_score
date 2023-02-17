@@ -9,6 +9,7 @@ let allTrash = document.querySelectorAll(".trash-button");
 let graders = document.querySelectorAll(".grader");
 let btn1 = document.querySelector(".sort-descending");
 let btn2 = document.querySelector(".sort-ascending");
+let allInputs = document.querySelector(".all-inputs");
 
 btn1.addEventListener("click", () => handleSorting("descending"));
 btn2.addEventListener("click", () => handleSorting("ascending"));
@@ -329,12 +330,96 @@ const handleSorting = (direction) => {
     );
   }
 
-  object = mergeSort(objectArray);
+  objectArray = mergeSort(objectArray);
   if (direction === "descending") {
     objectArray = objectArray.reverse();
   }
 
-  console.log(objectArray);
+  console.log("here:", direction, objectArray);
+
+  // delete all the contents within all-input area, and generate the sorted forms
+  allInputs.innerHTML = "";
+  for (let i = 0; i < objectArray.length; i++) {
+    allInputs.innerHTML += `
+    <form>
+            <div class="grader">
+              <input
+                type="text"
+                placeholder="class category"
+                class="class-type"
+                value="${objectArray[i].className}"
+                list="opt"
+              /><!----><input
+                type="text"
+                placeholder="class number"
+                class="class-number"
+                value="${objectArray[i].classNumber}"
+              /><!----><input
+                type="number"
+                placeholder="credits"
+                min="0"
+                max="6"
+                class="class-credit"
+                value="${objectArray[i].classCredit}"
+              /><!----><select name="select" class="select">
+                <option value=""></option>
+                <option value="A">A</option>
+                <option value="A-">A-</option>
+                <option value="B+">B+</option>
+                <option value="B">B</option>
+                <option value="B-">B-</option>
+                <option value="C+">C+</option>
+                <option value="C">C</option>
+                <option value="C-">C-</option>
+                <option value="D+">D+</option>
+                <option value="D">D</option>
+                <option value="D-">D-</option>
+                <option value="F">F</option>
+              </select><!----><button class="trash-button">
+                <i class="fas fa-trash"></i>
+              </button>
+            </div>
+          </form>
+    `;
+  }
+
+  graders = document.querySelectorAll("div.grader");
+  for (let i = 0; i < graders.length; i++) {
+    graders[i].children[3].value = objectArray[i].classGrade;
+  }
+
+  // add event listeners for the new elements
+  allSelects = document.querySelectorAll("select");
+  allSelects.forEach((select) => {
+    changeColor(select);
+    select.addEventListener("change", (e) => {
+      setGPA();
+      changeColor(e.target);
+    });
+  });
+
+  allCredits = document.querySelectorAll(".class-credit");
+  allCredits.forEach((credit) => {
+    credit.addEventListener("change", () => {
+      setGPA();
+    });
+  });
+
+  allTrash = document.querySelectorAll(".trash-button");
+  allTrash.forEach((trash) => {
+    trash.addEventListener("click", (e) => {
+      e.preventDefault();
+      e.target.parentElement.parentElement.style.animation =
+        "scaleDown 0.5s ease forwards";
+      e.target.parentElement.parentElement.addEventListener(
+        "animationend",
+        (e) => {
+          e.target.remove();
+          setGPA();
+        }
+      );
+    });
+  });
 };
 
 const merge = (a1, a2) => {
